@@ -1,4 +1,4 @@
-ARG OPENRESTY_VERSION=1.15.8.3
+ARG OPENRESTY_VERSION=1.15.8.2
 ARG NGINX_RTMP_VERSION=1.2.1
 ARG FFMPEG_VERSION=4.2.2
 ARG LUAJIT_VERSION=2.1-20200102 
@@ -31,13 +31,14 @@ RUN apk add --update \
   pcre-dev \
   pkgconf \
   pkgconfig \
-  zlib-dev
+  zlib-dev \
+  perl
 
 # Get openresty source.
 RUN cd /tmp && \
-  wget https://github.com/openresty/openresty/archive/v${OPENRESTY_VERSION}.tar.gz && \
+  wget https://openresty.org/download/openresty-${OPENRESTY_VERSION}.tar.gz && \
   tar zxf openresty-${OPENRESTY_VERSION}.tar.gz && \
-  rm openresty-${NGINX_VERSION}.tar.gz
+  rm openresty-${OPENRESTY_VERSION}.tar.gz
 
 # Get nginx-rtmp module.
 RUN cd /tmp && \
