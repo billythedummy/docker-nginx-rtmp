@@ -4,7 +4,7 @@ default settings for HLS live streaming. Built on Alpine Linux.
 
 Forked from [alfg](https://github.com/alfg/docker-nginx-rtmp). All I did was change all instances of "nginx" to "openresty" just so I could write lua in nginx.conf.
 
-* ~~Nginx 1.16.1~~ OpenResty 1.15.8.3 (Stable version compiled from source)
+* ~~Nginx 1.16.1~~ OpenResty 1.15.8.2 (compiled from source)
 * nginx-rtmp-module 1.2.1 (compiled from source)
 * ffmpeg 4.2.1 (compiled from source)
 * Default HLS settings (See: [nginx.conf](nginx.conf))
