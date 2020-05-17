@@ -1,8 +1,10 @@
-# docker-nginx-rtmp
-A Dockerfile installing NGINX, nginx-rtmp-module and FFmpeg from source with
+# docker-~~nginx~~-openresty-rtmp
+A Dockerfile installing NGINX + OpenResty, nginx-rtmp-module and FFmpeg from source with
 default settings for HLS live streaming. Built on Alpine Linux.
 
-* Nginx 1.16.1 (Stable version compiled from source)
+Forked from [alfg](https://github.com/alfg/docker-nginx-rtmp). All I did was change all instances of "nginx" to "openresty" just so I could write lua in nginx.conf.
+
+* ~~Nginx 1.16.1~~ OpenResty 1.15.8.3 (Stable version compiled from source)
 * nginx-rtmp-module 1.2.1 (compiled from source)
 * ffmpeg 4.2.1 (compiled from source)
 * Default HLS settings (See: [nginx.conf](nginx.conf))
@@ -17,8 +19,8 @@ default settings for HLS live streaming. Built on Alpine Linux.
 ### Server
 * Pull docker image and run:
 ```
-docker pull alfg/nginx-rtmp
-docker run -it -p 1935:1935 -p 8080:80 --rm alfg/nginx-rtmp
+docker pull dhy1996/openresty-rtmp
+docker run -it -p 1935:1935 -p 8080:80 --rm dhy1996/openresty-rtmp
 ```
 or 
 
