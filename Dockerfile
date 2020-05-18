@@ -155,6 +155,9 @@ RUN apk add --update \
 
 COPY --from=build-openresty /usr/local /usr/local
 COPY --from=build-openresty /etc/nginx /etc/nginx
+COPY --from=build-openresty /usr/lib/perl5 /usr/lib/perl5
+COPY --from=build-openresty /usr/bin/perl /usr/bin/perl
+COPY --from=build-openresty /usr/share/perl5 /usr/share/perl5
 COPY --from=build-ffmpeg /usr/local /usr/local
 COPY --from=build-ffmpeg /usr/lib/libfdk-aac.so.2 /usr/lib/libfdk-aac.so.2
 
