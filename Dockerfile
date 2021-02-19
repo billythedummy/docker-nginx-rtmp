@@ -1,14 +1,13 @@
-ARG OPENRESTY_VERSION=1.15.8.2
-ARG NGINX_RTMP_VERSION=1.2.1
-ARG FFMPEG_VERSION=4.2.2
-ARG LUAJIT_VERSION=2.1-20200102
+ARG OPENRESTY_VERSION=1.19.3.1
+# prefix with v for regular version number to match repo format
+ARG NGINX_RTMP_VERSION=master
+ARG FFMPEG_VERSION=4.3.1
 
 ##############################
 # Build the openresty-build image.
-FROM alpine:3.11 as build-openresty
+FROM alpine:3.13 as build-openresty
 ARG OPENRESTY_VERSION
 ARG NGINX_RTMP_VERSION
-ARG LUAJIT_VERSION
 
 # Build dependencies.
 RUN apk add --update \
@@ -38,8 +37,8 @@ RUN cd /tmp && \
 
 # Get nginx-rtmp module.
 RUN cd /tmp && \
-  wget https://github.com/arut/nginx-rtmp-module/archive/v${NGINX_RTMP_VERSION}.tar.gz && \
-  tar zxf v${NGINX_RTMP_VERSION}.tar.gz && rm v${NGINX_RTMP_VERSION}.tar.gz
+  wget https://github.com/arut/nginx-rtmp-module/archive/${NGINX_RTMP_VERSION}.tar.gz && \
+  tar zxf ${NGINX_RTMP_VERSION}.tar.gz && rm ${NGINX_RTMP_VERSION}.tar.gz
 
 # Compile openresty with nginx-rtmp module.
 RUN cd /tmp/openresty-${OPENRESTY_VERSION} && \
@@ -58,7 +57,7 @@ RUN cd /tmp/openresty-${OPENRESTY_VERSION} && \
 
 ###############################
 # Build the FFmpeg-build image.
-FROM alpine:3.11 as build-ffmpeg
+FROM alpine:3.13 as build-ffmpeg
 ARG FFMPEG_VERSION
 ARG PREFIX=/usr/local
 ARG MAKEFLAGS="-j4"
@@ -127,7 +126,7 @@ RUN rm -rf /var/cache/* /tmp/*
 
 ##########################
 # Build the release image.
-FROM alpine:3.11
+FROM alpine:3.13
 LABEL MAINTAINER Alfred Gutierrez <alf.g.jr@gmail.com>
 
 # Set default ports.
